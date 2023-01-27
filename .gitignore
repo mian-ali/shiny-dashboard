@@ -4,3 +4,8 @@
 ../node_modules
 /node_modules
 node_modules
+
+# envirement variables
+.env
+../.env
+/.env
