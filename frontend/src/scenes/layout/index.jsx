@@ -24,9 +24,9 @@ function Layout() {
         isSidebarOpen={isSidebaeOpen}
         setIsSidebarOpen={setIsSidebarOpen}
       />
-      <Box>
+      <Box flexGrow={1}>
         <Navbar
-          user={data || {} }
+          user={data || {}}
           isSidebarOpen={isSidebaeOpen}
           setIsSidebarOpen={setIsSidebarOpen}
         />
