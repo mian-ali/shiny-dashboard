@@ -24,9 +24,15 @@ import {
   useTheme,
 } from '@mui/material';
 
-function Navbar({ isSidebarOpen, setIsSidebarOpen}) {
+function Navbar({ user, isSidebarOpen, setIsSidebarOpen }) {
   const dispatch = useDispatch();
   const theme = useTheme();
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const isOpen = Boolean(anchorEl);
+  const handleClick = (event) => setAnchorEl(event.currentTarget);
+  const handleClose = () => setAnchorEl(null);
 
   return (
     <AppBar
@@ -38,7 +44,7 @@ function Navbar({ isSidebarOpen, setIsSidebarOpen}) {
       <Toolbar sx={{ justifyContent: 'space-between' }}>
         {/* // LEFT SIDE */}
         <FlexBetween>
-          <IconButton onClick={()=> setIsSidebarOpen(!isSidebarOpen)}>
+          <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
             <MenuIcon />
           </IconButton>
           <FlexBetween
@@ -67,7 +73,7 @@ function Navbar({ isSidebarOpen, setIsSidebarOpen}) {
           </IconButton>
           <FlexBetween>
             <Button
-              //   onClick={handleClick}
+              onClick={handleClick}
               sx={{
                 display: 'flex',
                 justifyContent: 'space-between',
@@ -89,22 +95,23 @@ function Navbar({ isSidebarOpen, setIsSidebarOpen}) {
                   fontWeight="bold"
                   fontSize="0.85rem"
                   sx={{ color: theme.palette.secondary[100] }}>
-                  {/* {user.name} */}
-                  Ali
+                  {user.name}
                 </Typography>
                 <Typography
                   fontSize="0.75rem"
                   sx={{ color: theme.palette.secondary[200] }}>
-                  {/* {user.occupation} */}
-                  Ahmad
+                  {user.occupation}
                 </Typography>
               </Box>
               <ArrowDropDownOutlined
                 sx={{ color: theme.palette.secondary[300], fontSize: '25px' }}
               />
             </Button>
-            <Menu anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-              <MenuItem>Log Out</MenuItem>
+            <Menu
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+              open={isOpen}
+              onClose={handleClose}>
+              <MenuItem onClick={handleClose}>Log Out</MenuItem>
             </Menu>
           </FlexBetween>
         </FlexBetween>
